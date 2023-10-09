@@ -26,7 +26,14 @@ class GameMatrix:
                 biggest = max(dice_1, dice_2)
                 smallest = min(dice_1, dice_2)
                 winning_prob = (smallest - 1) / (biggest *2)
-                self.winnging_probs[i][j] = winning_prob
+                draw_prob = smallest / (dice_1 * dice_2)
+                if(dice_1 == dice_2):
+                    self.winnging_probs[i][j] = (1 - draw_prob) / 2
+                    
+                elif(dice_1 < dice_2):
+                    self.winnging_probs[i][j] = winning_prob
+                else:
+                    self.winnging_probs[i][j] = 1 - winning_prob - draw_prob
 
     def get_dice_with_strategy(self, strategy_1:str, strategy_2:str):
         return self.dice_matrix[self.strategy_to_index[strategy_1]][self.strategy_to_index[strategy_2]]
@@ -38,6 +45,10 @@ class GameMatrix:
         dice_format = lambda n_dice: f'D{n_dice}'
         df=  pd.DataFrame(self.dice_matrix, columns=self.strategy_table, index=self.strategy_table)
         df = df.map(dice_format)
+        return df
+    
+    def probs_to_df(self):
+        df = pd.DataFrame(self.winnging_probs, columns=self.strategy_table, index=self.strategy_table)
         return df
     
     
