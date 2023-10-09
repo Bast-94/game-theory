@@ -5,6 +5,8 @@ class GameMatrix:
     def __init__(self):
         
         self.strategy_table = ['W', 'S', 'G', 'E', 'M', 'T', 'N']
+        self.n_strategies = len(self.strategy_table)
+        self.winnging_probs = np.zeros((self.n_strategies, self.n_strategies))
         dice_matrix = [ [6, 10, 6, 12, 10, 3, 4],
             [6, 6, 3, 6, 6, 12, 4],
             [6, 12, 6, 4, 6,10, 3],
@@ -15,6 +17,16 @@ class GameMatrix:
         self.dice_matrix = np.array(dice_matrix)
         self.index_to_strategy = {i: self.strategy_table[i] for i in range(len(self.strategy_table))}
         self.strategy_to_index = {self.strategy_table[i]: i for i in range(len(self.strategy_table))}
+    
+    def init_winning_probs(self):
+        for i in range(self.n_strategies):
+            for j in range(self.n_strategies):
+                dice_1 = self.dice_matrix[i][j]
+                dice_2 = self.dice_matrix[j][i]
+                biggest = max(dice_1, dice_2)
+                smallest = min(dice_1, dice_2)
+                winning_prob = (smallest - 1) / (biggest *2)
+                self.winnging_probs[i][j] = winning_prob
 
     def get_dice_with_strategy(self, strategy_1:str, strategy_2:str):
         return self.dice_matrix[self.strategy_to_index[strategy_1]][self.strategy_to_index[strategy_2]]
@@ -27,4 +39,5 @@ class GameMatrix:
         df=  pd.DataFrame(self.dice_matrix, columns=self.strategy_table, index=self.strategy_table)
         df = df.map(dice_format)
         return df
+    
     
