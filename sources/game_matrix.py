@@ -25,9 +25,6 @@ class GameMatrix:
     def generate_df(self):
         dice_format = lambda n_dice: f'D{n_dice}'
         df=  pd.DataFrame(self.dice_matrix, columns=self.strategy_table, index=self.strategy_table)
-        df = df.applymap(dice_format)
+        df = df.map(dice_format)
         return df
     
-game_matrix = GameMatrix()
-matrix_df = game_matrix.generate_df()
-print(matrix_df)
