@@ -1,9 +1,31 @@
 import numpy  as np
 import pandas as pd
 
+
 class GameMatrix:
+    """
+    A class representing the game matrix for a game of dice.
+
+    Attributes:
+    -----------
+    strategy_table : list
+        A list of strings representing the available strategies for the game.
+    n_strategies : int
+        The number of strategies available in the game.
+    winnging_probs : numpy.ndarray
+        A 2D numpy array representing the winning probabilities for each pair of strategies.
+    dice_matrix : numpy.ndarray
+        A 2D numpy array representing the dice roll probabilities for each pair of strategies.
+    index_to_strategy : dict
+        A dictionary mapping strategy indices to their corresponding string representation.
+    strategy_to_index : dict
+        A dictionary mapping strategy string representations to their corresponding index.
+    """
+
     def __init__(self):
-        
+        """
+        Initializes the GameMatrix object with default values for the game matrix.
+        """
         self.strategy_table = ['W', 'S', 'G', 'E', 'M', 'T', 'N']
         self.n_strategies = len(self.strategy_table)
         self.winnging_probs = np.zeros((self.n_strategies, self.n_strategies))
@@ -17,8 +39,9 @@ class GameMatrix:
         self.dice_matrix = np.array(dice_matrix)
         self.index_to_strategy = {i: self.strategy_table[i] for i in range(len(self.strategy_table))}
         self.strategy_to_index = {self.strategy_table[i]: i for i in range(len(self.strategy_table))}
-    
+
     def init_winning_probs(self):
+        
         for i in range(self.n_strategies):
             for j in range(self.n_strategies):
                 dice_1 = self.dice_matrix[i][j]
@@ -28,8 +51,7 @@ class GameMatrix:
                 
                 smallest_wins_prob = (smallest - 1) / (biggest *2)
                 draw_prob = 1 / biggest
-                #print(5*'-')
-                #print(f'{smallest} vs {biggest}')
+                
                 if(dice_1 == dice_2):
                     self.winnging_probs[i][j] = (1 - draw_prob) / 2
                 elif(dice_1 < dice_2):
