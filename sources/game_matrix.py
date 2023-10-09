@@ -25,18 +25,18 @@ class GameMatrix:
                 dice_2 = self.dice_matrix[j][i]
                 biggest = max(dice_1, dice_2)
                 smallest = min(dice_1, dice_2)
-                #print(5*'-')
-                #print(f'{smallest} vs {biggest}')
+                
                 smallest_wins_prob = (smallest - 1) / (biggest *2)
                 draw_prob = 1 / biggest
-                #print(f'{smallest_wins_prob:.2f}, draw: {draw_prob:.2f}')
+                #print(5*'-')
+                #print(f'{smallest} vs {biggest}')
                 if(dice_1 == dice_2):
                     self.winnging_probs[i][j] = (1 - draw_prob) / 2
                 elif(dice_1 < dice_2):
                     self.winnging_probs[i][j] = smallest_wins_prob 
                 else:
                     self.winnging_probs[i][j] = 1 - smallest_wins_prob - draw_prob
-                #print(f'winning prob: {self.winnging_probs[i][j]:.2f} , {1-draw_prob:.2f}')
+                
                 self.winnging_probs[i][j] = self.winnging_probs[i][j] / (1-draw_prob)
 
     def get_dice_with_strategy(self, strategy_1:str, strategy_2:str):
