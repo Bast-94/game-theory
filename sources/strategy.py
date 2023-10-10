@@ -1,3 +1,6 @@
+import random
+
+
 class Strategy:
     def __init__(self, player) -> None:
         self.player = player
@@ -9,7 +12,7 @@ class Strategy:
         return len(self.get_subset())
 
     def choice(self):
-        pass
+        return random.choice(self.get_subset())
 
     def get_game_matrix(self):
         return self.player.game.game_matrix
