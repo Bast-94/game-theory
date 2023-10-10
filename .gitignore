@@ -159,3 +159,4 @@ cython_debug/
 #.idea/
 winning_probs.csv
 rest.txt
+opt.sh
