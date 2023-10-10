@@ -27,24 +27,33 @@ class GameMatrix:
     def init_winning_probs(self):
         for i in range(self.n_strategies):
             for j in range(self.n_strategies):
-                dice_1 = self.dice_matrix[i][j]
-                dice_2 = self.dice_matrix[j][i]
-                biggest = max(dice_1, dice_2)
-                smallest = min(dice_1, dice_2)
-
-                smallest_wins_prob = (smallest - 1) / (biggest * 2)
-                draw_prob = 1 / biggest
-                # print(5*'-')
-                # print(f'{smallest} vs {biggest}')
-                if dice_1 == dice_2:
-                    self.winnging_probs[i][j] = (1 - draw_prob) / 2
-                elif dice_1 < dice_2:
-                    self.winnging_probs[i][j] = smallest_wins_prob
-                else:
-                    self.winnging_probs[i][j] = 1 - smallest_wins_prob - draw_prob
-
-                self.winnging_probs[i][j] = self.winnging_probs[i][j] / (1 - draw_prob)
-
+                self.winnging_probs[i][j] = self.get_win_prob(i, j)
+    
+    
+    def get_win_prob(self, strategy_1: str|int, strategy_2: str|int):
+        return self.get_result_prob(strategy_1, strategy_2, "win")
+    
+    def get_result_prob(self, strategy_1: str|int, strategy_2: str|int,result_type:str):
+        assert result_type in ["win","draw","lose"]
+        if isinstance(strategy_1, str) and isinstance(strategy_2, str):
+            strategy_1 = self.strategy_to_index[strategy_1]
+            strategy_2 = self.strategy_to_index[strategy_2]
+        dice_1 = self.dice_matrix[strategy_1,strategy_2]
+        dice_2 = self.dice_matrix[strategy_1,strategy_2]
+        draw_prob = (1 - 1/max(dice_1,dice_2)) / 2
+        if result_type == "draw":
+            return draw_prob
+        winning_prob = 0
+        if dice_1 == dice_2:
+            winning_prob = (1 - 1/dice_1) / 2
+        elif dice_1 < dice_2:
+            winning_prob = (dice_1 - 1) / (dice_1 * 2)
+        else:
+            winning_prob = 1 - (dice_2 - 1) / (dice_2 * 2)
+        if result_type == "win":
+            return winning_prob
+        return 1 - winning_prob - draw_prob
+    
     def get_dice_with_strategy(self, strategy_1: str, strategy_2: str):
         return self.dice_matrix[self.strategy_to_index[strategy_1]][
             self.strategy_to_index[strategy_2]
