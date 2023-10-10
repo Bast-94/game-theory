@@ -27,6 +27,15 @@ class Game:
         player_1_score = self.player_1.play_strategy()
         player_2_score = self.player_2.play_strategy()
 
+        print("Payer 1 subset: ", self.player_1.subset)
+        print("Payer 2 subset: ", self.player_2.subset)
+
+        print("Player 1 played: ", self.player_1.played_strategy)
+        print("Player 2 played: ", self.player_2.played_strategy)
+
+        print("Player 1 score: ", player_1_score)
+        print("Player 2 score: ", player_2_score)
+
         if player_1_score > player_2_score:
             print("Player 1 win")
             self.player_2.remove_strategy()
@@ -34,6 +43,8 @@ class Game:
         elif player_1_score < player_2_score:
             print("Player 2 win")
             self.player_1.remove_strategy()
+        else:
+            print("Draw")
 
     def check_win_phase(self):
         stop_game = not ("N" in self.player_1.subset) or not (
