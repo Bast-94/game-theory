@@ -4,14 +4,14 @@ from sources.game_matrix import GameMatrix
 
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self, player_1=None, player_2=None) -> None:
         from sources.player import Player
 
         self.game_matrix = GameMatrix()
         self.game_matrix.init_winning_probs()
         self.subset_size = 10
-        self.player_1 = Player(self)
-        self.player_2 = Player(self)
+        self.player_1 = Player(self) if player_1 is None else player_1
+        self.player_2 = Player(self) if player_2 is None else player_2
         self.winner = None
 
     def render(self):
