@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 import pandas as pd
 
@@ -28,7 +30,7 @@ class GameMatrix:
         """
         self.strategy_table = ["W", "S", "G", "E", "M", "T", "N"]
         self.n_strategies = len(self.strategy_table)
-        self.winnging_probs = np.zeros((self.n_strategies, self.n_strategies))
+        self.winning_probs = np.zeros((self.n_strategies, self.n_strategies))
         dice_matrix = [
             [6, 10, 6, 12, 10, 3, 4],
             [6, 6, 3, 6, 6, 12, 4],
@@ -49,9 +51,9 @@ class GameMatrix:
     def init_winning_probs(self, count_draws=False):
         for i in range(self.n_strategies):
             for j in range(self.n_strategies):
-                self.winnging_probs[i][j] = self.get_win_prob(i, j)
+                self.winning_probs[i][j] = self.get_win_prob(i, j)
                 if count_draws:
-                    self.winnging_probs[i][j] += self.get_result_prob(i, j, "draw")
+                    self.winning_probs[i][j] += self.get_result_prob(i, j, "draw")
 
     def get_win_prob(self, strategy_1: str | int, strategy_2: str | int):
         return self.get_result_prob(strategy_1, strategy_2, "win")
@@ -97,6 +99,13 @@ class GameMatrix:
 
     def probs_to_df(self):
         df = pd.DataFrame(
-            self.winnging_probs, columns=self.strategy_table, index=self.strategy_table
+            self.winning_probs, columns=self.strategy_table, index=self.strategy_table
         )
         return df
+
+    def get_score(self, strategy_1: str, strategy_2: str):
+        if isinstance(strategy_1, str) and isinstance(strategy_2, str):
+            strategy_1 = self.strategy_to_index[strategy_1]
+            strategy_2 = self.strategy_to_index[strategy_2]
+        dice_1 = self.dice_matrix[strategy_1, strategy_2]
+        return random.randint(1, dice_1 + 1)
