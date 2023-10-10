@@ -1,15 +1,15 @@
 import random
 
+from sources.default_strategy import DefaultStrategy
 from sources.game import Game
-from sources.default_strategy import DefaultStrategy     
 from sources.strategy import Strategy
 
+
 class Player:
-    
     def __init__(self, game: Game, strat_algo: Strategy = None) -> None:
         self.game = game
         self.score = 0
-        self.strat_algo = DefaultStrategy(self)  if strat_algo is None else strat_algo
+        self.strat_algo = DefaultStrategy(self) if strat_algo is None else strat_algo
         self.played_strategy = None
         self.subset = None
         self.strat_algo.create_subset()
@@ -29,4 +29,3 @@ class Player:
 
     def remove_strategy(self):
         self.subset.remove(self.played_strategy)
-
