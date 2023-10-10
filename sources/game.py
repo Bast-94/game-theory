@@ -11,7 +11,9 @@ class Game:
         self.game_matrix.init_winning_probs()
         self.subset_size = 10
         self.player_1 = Player(self) if player_1 is None else player_1
+        self.player_1.game = self
         self.player_2 = Player(self) if player_2 is None else player_2
+        self.player_2.game = self
         self.winner = None
 
     def render(self):
@@ -24,14 +26,18 @@ class Game:
         pass
 
     def dual_phase(self):
-        player_1_score = self.player_1.play_strategy()
-        player_2_score = self.player_2.play_strategy()
-
         print("Payer 1 subset: ", self.player_1.subset)
         print("Payer 2 subset: ", self.player_2.subset)
-
+        self.player_1.play_strategy()
+        self.player_2.play_strategy()
         print("Player 1 played: ", self.player_1.played_strategy)
         print("Player 2 played: ", self.player_2.played_strategy)
+        strat_1 = self.player_1.played_strategy
+        strat_2 = self.player_2.played_strategy
+        print("Strat 1: ", strat_1)
+
+        player_1_score = self.game_matrix.get_score(strat_1, strat_2)
+        player_2_score = self.game_matrix.get_score(strat_2, strat_1)
 
         print("Player 1 score: ", player_1_score)
         print("Player 2 score: ", player_2_score)
