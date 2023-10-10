@@ -15,8 +15,7 @@ class Player:
         self.strat_algo.create_subset()
 
     def choice_strategy(self):
-        chosen_strategy = random.choice(self.subset)
-        return chosen_strategy
+        return self.strat_algo.choice()
 
     def play_strategy(self):
         self.played_strategy = self.choice_strategy()
