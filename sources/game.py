@@ -1,3 +1,5 @@
+import random
+
 from sources.game_matrix import GameMatrix
 
 
@@ -22,7 +24,16 @@ class Game:
         pass
 
     def dual_phase(self):
-        pass
+        player_1_score = self.player_1.play_strategy()
+        player_2_score = self.player_2.play_strategy()
+
+        if player_1_score > player_2_score:
+            print("Player 1 win")
+            self.player_2.remove_strategy()
+
+        elif player_1_score < player_2_score:
+            print("Player 2 win")
+            self.player_1.remove_strategy()
 
     def check_win_phase(self):
         stop_game = not ("N" in self.player_1.subset) or not (
