@@ -8,7 +8,7 @@ class DefaultStrategy(Strategy):
         super().__init__(player)
 
     def choice(self):
-        pass
+        return random.choice(self.get_subset())
 
     def create_subset(self):
         subset = ["N"]
