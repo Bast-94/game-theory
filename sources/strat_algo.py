@@ -9,9 +9,9 @@ class StratAlgo:
     def get_subset(self):
         return self.player.subset
 
-    def get_subset_size(self, player: Player):
+    def get_subset_size(self):
         return len(self.get_subset())
     
-    def choice(self, player: Player):
+    def choice(self):
         return self.get_subset()[0]
     
