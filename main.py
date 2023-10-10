@@ -1,6 +1,8 @@
-from sources import Game, GameMatrix, Player
+from sources import (DefaultStrategy, ExpectationEval, Game, GameMatrix,
+                     Player, Strategy)
 
-game = Game()
+player_1 = Player(Game(), ExpectationEval)
+game = Game(player_1=player_1)
 game.render()
 game_matrix = game.game_matrix
 game_matrix.init_winning_probs()
