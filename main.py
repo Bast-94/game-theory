@@ -1,11 +1,7 @@
-from sources import (DefaultStrategy, ExpectationEval, Game, GameMatrix,
-                     Player, Strategy)
+from sources import GameMatrix
 
-player_1 = Player(Game(), ExpectationEval)
-game = Game(player_1=player_1)
-game.render()
-game_matrix = game.game_matrix
+game_matrix = GameMatrix()
 game_matrix.init_winning_probs()
-
-print(game_matrix.probs_to_df())
-game.run()
+print(game_matrix.winning_probs.mean(axis=1))
+print(game_matrix.winning_probs)
+# game_matrix.winning_probs
