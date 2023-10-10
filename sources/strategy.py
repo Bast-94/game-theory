@@ -23,3 +23,6 @@ class Strategy:
 
     def create_subset(self):
         pass
+
+    def buy_items(self):
+        pass

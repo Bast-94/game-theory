@@ -24,7 +24,8 @@ class Game:
         print("Player 2 subset: ", self.player_2.subset)
 
     def buy_phase(self):
-        pass
+        self.player_1.buy_items()
+        self.player_2.buy_items()
 
     def dual_phase(self):
         self.player_1.play_strategy()

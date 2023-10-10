@@ -24,3 +24,6 @@ class Player:
 
     def remove_strategy(self):
         self.subset.remove(self.played_strategy)
+
+    def buy_items(self):
+        self.strat_algo.buy_items()
