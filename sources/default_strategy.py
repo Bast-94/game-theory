@@ -13,5 +13,5 @@ class DefaultStrategy(Strategy):
     def create_subset(self):
         subset = ["N"]
         for _ in range(1, self.player.game.subset_size):
-            subset.append(random.choice(self.game_matrix.strategy_table))
+            subset.append(random.choice(self.get_game_matrix().strategy_table))
         self.player.subset = subset
