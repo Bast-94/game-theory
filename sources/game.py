@@ -44,14 +44,12 @@ class Game:
             print("Player 2 score: ", player_2_score)
 
         if player_1_score > player_2_score:
-            print("Player 1 win")
+            # print("Player 1 win")
             self.player_2.remove_strategy()
 
         elif player_1_score < player_2_score:
-            print("Player 2 win")
+            # print("Player 2 win")
             self.player_1.remove_strategy()
-        else:
-            print("Draw")
 
     def check_win_phase(self):
         stop_game = False
