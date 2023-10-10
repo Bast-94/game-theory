@@ -1,6 +1,6 @@
 import random
 
-from sources import Game
+from sources.game import Game
 
 
 class Player:
