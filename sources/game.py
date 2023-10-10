@@ -53,13 +53,18 @@ class Game:
             print("Draw")
 
     def check_win_phase(self):
-        stop_game = not ("N" in self.player_1.subset) or not (
-            "N" in self.player_2.subset
-        )
-
+        if not ("N" in self.player_1.subset):
+            self.winner = self.player_1
+            stop_game = True
+        elif not ("N" in self.player_2.subset):
+            self.winner = self.player_2
+            stop_game = True
         return stop_game
 
     def run(self):
         while not self.check_win_phase():
             self.buy_phase()
             self.dual_phase()
+
+    def get_winner(self):
+        return self.winner
