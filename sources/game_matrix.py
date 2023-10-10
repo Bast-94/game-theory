@@ -24,6 +24,8 @@ class GameMatrix:
         A dictionary mapping strategy string representations to their corresponding index.
     """
 
+    prices = {"W": 5, "S": 7, "G": 7, "E": 8, "M": 8, "T": 12, "N": 30}
+
     def __init__(self):
         """
         Initializes the GameMatrix object with default values for the game matrix.
