@@ -7,8 +7,10 @@ reformat:
 	$(PYTHON) -m black . || echo "black failed"
 	$(PYTHON) -m isort . || echo "isort failed"
 
-fast_commit: reformat
+commit: reformat
 	sh pusher.sh
+fast_commit: reformat
+	sh pusher.sh quick
 
 fast_push: fast_commit
 	git push
