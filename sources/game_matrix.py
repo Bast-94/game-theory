@@ -46,11 +46,13 @@ class GameMatrix:
             self.strategy_table[i]: i for i in range(len(self.strategy_table))
         }
 
-    def init_winning_probs(self):
+    def init_winning_probs(self, count_draws=False):
         
         for i in range(self.n_strategies):
             for j in range(self.n_strategies):
                 self.winnging_probs[i][j] = self.get_win_prob(i, j)
+                if count_draws:
+                    self.winnging_probs[i][j] += self.get_result_prob(i, j, "draw")
     
     
     def get_win_prob(self, strategy_1: str|int, strategy_2: str|int):
@@ -63,7 +65,7 @@ class GameMatrix:
             strategy_2 = self.strategy_to_index[strategy_2]
         dice_1 = self.dice_matrix[strategy_1,strategy_2]
         dice_2 = self.dice_matrix[strategy_1,strategy_2]
-        draw_prob = (1 - 1/max(dice_1,dice_2)) / 2
+        draw_prob = (1/max(dice_1,dice_2))
         if result_type == "draw":
             return draw_prob
         winning_prob = 0
