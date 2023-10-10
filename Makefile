@@ -1,6 +1,6 @@
 PYTHON=python
 
-exec_main:
+exec_main: reformat
 	$(PYTHON) main.py
 
 reformat: 
