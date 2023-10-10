@@ -1,5 +1,8 @@
+import numpy as np
+
 from sources import GameMatrix
 
 game_matrix = GameMatrix()
 game_matrix.init_winning_probs()
-print(game_matrix.dice_matrix - game_matrix.dice_matrix.T)
+mat = game_matrix.dice_matrix - game_matrix.dice_matrix.T
+print(np.where(mat >= 0))
