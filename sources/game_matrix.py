@@ -64,7 +64,7 @@ class GameMatrix:
             strategy_1 = self.strategy_to_index[strategy_1]
             strategy_2 = self.strategy_to_index[strategy_2]
         dice_1 = self.dice_matrix[strategy_1, strategy_2]
-        dice_2 = self.dice_matrix[strategy_1, strategy_2]
+        dice_2 = self.dice_matrix[strategy_2, strategy_1]
         draw_prob = 1 / max(dice_1, dice_2)
         if result_type == "draw":
             return draw_prob
@@ -72,9 +72,9 @@ class GameMatrix:
         if dice_1 == dice_2:
             winning_prob = (1 - 1 / dice_1) / 2
         elif dice_1 < dice_2:
-            winning_prob = (dice_1 - 1) / (dice_1 * 2)
+            winning_prob = (dice_1 - 1) / (dice_2 * 2)
         else:
-            winning_prob = 1 - (dice_2 - 1) / (dice_2 * 2)
+            winning_prob = 1 - (dice_2 - 1) / (dice_1 * 2) - draw_prob
         if result_type == "win":
             return winning_prob
         return 1 - winning_prob - draw_prob
