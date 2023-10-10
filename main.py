@@ -6,4 +6,4 @@ game_matrix = GameMatrix()
 game_matrix.init_winning_probs()
 mat = game_matrix.dice_matrix - game_matrix.dice_matrix.T
 print(mat)
-print(np.where(mat > 0))
+print(mat[np.where(mat > 0)])
