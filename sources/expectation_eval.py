@@ -7,6 +7,12 @@ class ExpectationEval(Strategy):
     def __init__(self, player) -> None:
         super().__init__(player)
 
+    def choice(self):
+        # return a value different from 'N' if the subset is not empty
+        for strat in self.get_subset():
+            if strat != "N":
+                return strat
+
     def create_subset(self):
         subset = ["N"]
         self.get_game_matrix().init_winning_probs(count_draws=True)
