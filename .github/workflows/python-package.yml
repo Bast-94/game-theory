@@ -32,6 +32,6 @@ jobs:
     - name: Run simulation
       run: |
         pip freeze
-        python simulate.py
+        python simulate.py > res.txt
     
     

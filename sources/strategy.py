@@ -1,5 +1,7 @@
 import random
 
+from sources.game_matrix import GameMatrix
+
 
 class Strategy:
     def __init__(self, player) -> None:
@@ -25,4 +27,10 @@ class Strategy:
         pass
 
     def buy_items(self):
-        pass
+        prices = self.get_game_matrix().prices
+
+        for strategy in prices.keys():
+            if self.player.score >= prices[strategy]:
+                self.player.score -= prices[strategy]
+                self.player.subset.append(strategy)
+                break

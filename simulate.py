@@ -1,5 +1,7 @@
 from itertools import product
 
+from tqdm import tqdm
+
 from sources import (ExpectationEval, Game, GameMatrix, Player, RandomStrategy,
                      Strategy)
 
@@ -28,7 +30,7 @@ def make_simulations(nb_simulations, player_1_strategy, player_2_strategy):
     print(
         f"Simulating {nb_simulations} games with {player_1_strategy.name} vs {player_2_strategy.name}"
     )
-    for _ in range(nb_simulations):
+    for _ in tqdm(range(nb_simulations)):
         player_1 = Player(Game(), player_1_strategy)
         player_2 = Player(Game(), player_2_strategy)
         game = Game(player_1=player_1, player_2=player_2, verbose=False)

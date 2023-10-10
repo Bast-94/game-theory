@@ -16,6 +16,7 @@ class Game:
         self.player_2.game = self
         self.winner = None
         self.verbose = verbose
+        self.max_turns = 1000
 
     def render(self):
         print("Player 1: ", self.player_1.score)
@@ -43,12 +44,14 @@ class Game:
             print("Player 2 played: ", self.player_2.played_strategy)
             print("Player 1 score: ", player_1_score)
             print("Player 2 score: ", player_2_score)
-
+        self.player_1.score += player_1_score
+        self.player_2.score += player_2_score
         if player_1_score > player_2_score:
             self.player_2.remove_strategy()
 
         elif player_1_score < player_2_score:
             self.player_1.remove_strategy()
+        self.max_turns -= 1
 
     def check_win_phase(self):
         stop_game = False
@@ -61,7 +64,7 @@ class Game:
         return stop_game
 
     def run(self):
-        while not self.check_win_phase():
+        while not self.check_win_phase() and self.max_turns > 0:
             self.buy_phase()
             self.dual_phase()
 
