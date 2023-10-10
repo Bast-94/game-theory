@@ -3,7 +3,9 @@ import random
 from sources.strategy import Strategy
 
 
-class DefaultStrategy(Strategy):
+class RandomStrategy(Strategy):
+    name = "Random"
+
     def __init__(self, player) -> None:
         super().__init__(player)
 
