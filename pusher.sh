@@ -9,9 +9,6 @@ pusher() {
             git commit -m "UPDATE($file): $msg"
         done
 }
-Hello () {
-   echo "Hello World"
-}
-Hello
+
 pusher
 
