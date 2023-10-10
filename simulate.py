@@ -1,12 +1,12 @@
 from sources import (DefaultStrategy, ExpectationEval, Game, GameMatrix,
                      Player, Strategy)
 
-player_1 = Player(Game(), ExpectationEval)
-game = Game(player_1=player_1)
-game.render()
-game_matrix = game.game_matrix
-game_matrix.init_winning_probs()
-
-print(game_matrix.probs_to_df())
-game.run()
-print(game.winner)
+nb_simulations = 1000
+counter = 0
+for _ in range(nb_simulations):
+    player_1 = Player(Game(), ExpectationEval)
+    game = Game(player_1=player_1, verbose=False)
+    game.run()
+    if game.winner == player_1:
+        counter += 1
+print(f"Player 1 won {counter} times out of {nb_simulations} simulations")
