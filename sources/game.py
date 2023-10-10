@@ -1,13 +1,16 @@
-from sources import GameMatrix, Player
+from sources.game_matrix import GameMatrix
 
 
 class Game:
     def __init__(self) -> None:
+        from sources.player import Player
+
         self.game_matrix = GameMatrix()
         self.game_matrix.init_winning_probs()
         self.subset_size = 10
         self.player_1 = Player(self)
         self.player_2 = Player(self)
+        self.winner = None
 
     def render(self):
         print("Player 1: ", self.player_1.score)
@@ -22,4 +25,13 @@ class Game:
         pass
 
     def check_win_phase(self):
-        pass
+        stop_game = not ("N" in self.player_1.subset) or not (
+            "N" in self.player_2.subset
+        )
+
+        return stop_game
+
+    def run(self):
+        while not self.check_win_phase():
+            self.buy_phase()
+            self.dual_phase()
