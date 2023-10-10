@@ -9,8 +9,11 @@ class ExpectationEval(Strategy):
 
     def choice(self):
         # return a value different from 'N' if the subset is not empty
+
         for strat in self.get_subset():
-            if strat != "N":
+            if strat != "N" and len(self.get_subset()) > 1:
+                return strat
+            else:
                 return strat
 
     def create_subset(self):
