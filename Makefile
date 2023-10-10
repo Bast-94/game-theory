@@ -1,3 +1,4 @@
+PYTHON=python
 reformat: 
 	$(PYTHON) -m black . || echo "black failed"
 	$(PYTHON) -m isort . || echo "isort failed"
