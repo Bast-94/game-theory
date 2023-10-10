@@ -9,3 +9,4 @@ game_matrix.init_winning_probs()
 
 print(game_matrix.probs_to_df())
 game.run()
+print(game.winner)
