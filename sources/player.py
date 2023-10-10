@@ -1,21 +1,20 @@
 import random
 
 from sources.game import Game
-
+from sources.default_strategy import DefaultStrategy     
+from sources.strategy import Strategy
 
 class Player:
-    def __init__(self, game: Game) -> None:
+    
+    def __init__(self, game: Game, strat_algo: Strategy = None) -> None:
         self.game = game
         self.score = 0
-        self.strategy = None
-        self.subset = ["N"]
+        self.strat_algo = DefaultStrategy(self)  if strat_algo is None else strat_algo
         self.played_strategy = None
-        if self.strategy is None:
-            for i in range(1, self.game.subset_size):
-                self.subset.append(random.choice(self.game.game_matrix.strategy_table))
+        self.subset = None
+        self.strat_algo.create_subset()
 
     def choice_strategy(self):
-        # pop random strategy from subset
         chosen_strategy = random.choice(self.subset)
         return chosen_strategy
 
@@ -30,3 +29,4 @@ class Player:
 
     def remove_strategy(self):
         self.subset.remove(self.played_strategy)
+
