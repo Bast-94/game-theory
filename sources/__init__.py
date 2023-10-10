@@ -1,4 +1,4 @@
-from sources.default_strategy import DefaultStrategy
+from sources.default_strategy import RandomStrategy
 from sources.expectation_eval import ExpectationEval
 from sources.game import Game
 from sources.game_matrix import GameMatrix
@@ -10,6 +10,6 @@ __all__ = [
     "Game",
     "Player",
     "Strategy",
-    "DefaultStrategy",
+    "RandomStrategy",
     "ExpectationEval",
 ]
