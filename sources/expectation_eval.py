@@ -21,7 +21,6 @@ class ExpectationEval(Strategy):
         self.get_game_matrix().init_winning_probs(count_draws=True)
         best_strat_index = self.get_game_matrix().winning_probs.mean(axis=1).argmax()
         best_strat = self.get_game_matrix().strategy_table[best_strat_index]
-        print(f"Best strat: {best_strat}")
 
         for _ in range(1, self.get_game().subset_size):
             subset.append(best_strat)
