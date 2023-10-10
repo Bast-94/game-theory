@@ -3,6 +3,7 @@ import random
 
 class Strategy:
     def __init__(self, player) -> None:
+        self.name = "Default"
         self.player = player
 
     def get_subset(self):
