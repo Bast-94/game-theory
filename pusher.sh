@@ -1,7 +1,5 @@
-function pusher
-{
-    # if $1 is not empty
-    
+#!/bin/sh
+pusher() {
     echo $(git status --porcelain  | awk 'match($1, ""){print $2}' )
     for file in $(git status --porcelain  | awk 'match($1, ""){print $2}' );
         do
@@ -11,5 +9,9 @@ function pusher
             git commit -m "UPDATE($file): $msg"
         done
 }
+Hello () {
+   echo "Hello World"
+}
+Hello
 pusher
 
